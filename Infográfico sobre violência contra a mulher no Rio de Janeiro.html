@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infográfico: Violência Contra Mulheres no Rio de Janeiro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .section-title {
+            font-size: 1.875rem; /* text-3xl */
+            font-weight: 700; /* bold */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .stat-card {
+            background-color: white;
+            border-radius: 0.5rem; /* rounded-lg */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* shadow-md */
+            padding: 1.5rem; /* p-6 */
+            margin-bottom: 1.5rem; /* mb-6 */
+        }
+        .big-number {
+            font-size: 3rem; /* text-5xl */
+            font-weight: 700; /* bold */
+        }
+        .stat-label {
+            font-size: 1rem; /* text-base */
+            color: #4b5563; /* text-gray-600 */
+        }
+        /* Paleta de Cores: "Cores Vibrantes e Impactantes" */
+        /* Cor de Fundo Principal da Página: bg-slate-100 (#f1f5f9) */
+        /* Cor de Fundo dos Cards: bg-white (#ffffff) */
+        /* Cor de Texto Principal: text-slate-700 (#334155) */
+        /* Cor de Destaque Títulos: text-rose-600 (#e11d48) */
+        /* Cores Gráficos: '#d90429' (vermelho), '#f97316' (laranja), '#8b5cf6' (roxo), '#3b82f6' (azul) */
+        /* Cor Acento Números: '#f59e0b' (ambar) */
+
+        /* Estilo para setas em diagramas HTML/CSS */
+        .arrow {
+            display: inline-block;
+            margin: 0 0.5rem;
+            color: #6b7280; /* text-gray-500 */
+        }
+        .flow-item {
+            border: 1px solid #e5e7eb; /* border-gray-200 */
+            padding: 1rem;
+            border-radius: 0.375rem; /* rounded-md */
+            text-align: center;
+            background-color: #f9fafb; /* bg-gray-50 */
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-700">
+    <!-- 
+        Plano Narrativo e Estrutura do Infográfico:
+        1. Título e Introdução: Impacto inicial e contextualização.
+        2. Magnitude da Violência: Tipos e números prevalentes (foco em dados de 2023).
+        3. Tendências da Violência: Evolução de indicadores chave (psicológica, feminicídios, estupros).
+        4. Concentração Geográfica: Onde a violência é mais crítica (Região Metropolitana vs. Interior).
+        5. Raízes do Problema: Causas socioculturais, individuais e sistêmicas.
+        6. Perfil (Feminicídio): Características das vítimas e agressores.
+        7. Ciclo da Violência e Subnotificação: Mecanismos que perpetuam a violência.
+        8. Chamada para Ação: Mensagem final sobre prevenção.
+
+        Escolhas de Visualização (Todas SEM SVG e SEM Mermaid JS):
+        - Single Big Number (HTML/Tailwind): Para estatísticas de impacto imediato.
+        - Donut Chart (Chart.js - Canvas): Para mostrar proporções (ex: motivações de feminicídio).
+        - Bar Chart (Chart.js - Canvas): Para comparar valores entre categorias ou ao longo do tempo.
+        - Line Chart (Chart.js - Canvas): Para mostrar tendências ao longo do tempo.
+        - Cards com Números Chave (HTML/Tailwind): Para destacar dados específicos.
+        - Diagramas com HTML/CSS/Tailwind: Para representar fluxos (Ciclo da Violência) ou categorizações (Causas).
+
+        Paleta de Cores Escolhida: "Cores Vibrantes e Impactantes" (definida no <style> e classes Tailwind).
+        Vermelho (#d90429), Laranja (#f97316), Roxo (#8b5cf6), Azul (#3b82f6), Âmbar (#f59e0b).
+        Fundo: Cinza claro (slate-100), Cards: Branco, Texto: Cinza escuro (slate-700), Títulos: Rosa/Vermelho (rose-600).
+
+        Confirmação: NEM Mermaid JS NEM SVG foram utilizados neste infográfico. Todas as visualizações são HTML/CSS/Tailwind ou Chart.js (Canvas).
+    -->
+
+    <header class="bg-rose-600 text-white py-12 px-4 text-center">
+        <h1 class="text-4xl md:text-5xl font-bold mb-4">Violência Contra Mulheres no Rio de Janeiro</h1>
+        <p class="text-xl md:text-2xl max-w-3xl mx-auto">Um olhar aprofundado sobre as estatísticas, tendências e os desafios para a prevenção.</p>
+    </header>
+
+    <main class="container mx-auto px-4 py-8">
+
+        <section id="impacto-inicial" class="my-12 text-center">
+            <div class="stat-card max-w-md mx-auto bg-white">
+                <p class="big-number text-rose-600">140</p>
+                <p class="stat-label text-xl">mulheres vítimas de violência psicológica POR DIA no Rio de Janeiro em 2023.</p>
+                <p class="text-sm text-slate-500 mt-2">(Fonte: ISP-RJ, Dossiê Mulher 2024)</p>
+            </div>
+            <p class="mt-6 text-lg max-w-2xl mx-auto">
+                A violência contra as mulheres é uma violação grave dos direitos humanos e um problema crítico de saúde pública e segurança no Rio de Janeiro. Este infográfico explora os dados mais recentes para entender a dimensão deste desafio.
+            </p>
+        </section>
+
+        <section id="magnitude" class="my-12">
+            <h2 class="section-title text-rose-600 text-center">A Magnitude da Violência em 2023</h2>
+            <p class="text-center mb-8 text-lg max-w-2xl mx-auto">A violência psicológica é a forma mais registrada, mas diversos outros tipos de agressão afetam milhares de mulheres anualmente.</p>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="stat-card">
+                    <h3 class="text-xl font-semibold mb-2 text-rose-500">Violência Psicológica Total</h3>
+                    <p class="big-number text-rose-500">51.019</p>
+                    <p class="stat-label">vítimas</p>
+                    <p class="text-sm mt-2">Principalmente ameaças (43.333 vítimas). Representou 36% de todos os casos de VCM.</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-xl font-semibold mb-2 text-orange-500">Violência Sexual Total</h3>
+                    <p class="big-number text-orange-500">7.284</p>
+                    <p class="stat-label">vítimas</p>
+                    <p class="text-sm mt-2">Inclui Estupro (4.759), Importunação Sexual (2.227) e Assédio Sexual (298).</p>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-xl font-semibold mb-2 text-red-600">Feminicídio Consumado</h3>
+                    <p class="big-number text-red-600">99</p>
+                    <p class="stat-label">mulheres assassinadas</p>
+                    <p class="text-sm mt-2">Expressão máxima da violência de gênero.</p>
+                </div>
+                <div class="stat-card md:col-span-1 lg:col-span-3">
+                    <h3 class="text-xl font-semibold mb-2 text-purple-600">Outros Tipos de Violência e Fatores Agravantes</h3>
+                    <ul class="list-disc list-inside text-slate-600 space-y-1">
+                        <li><strong>Violência Física (Lesão Corporal Dolosa):</strong> Significativa, com 67% dos casos (Lei Maria da Penha) concentrados na Região Metropolitana.</li>
+                        <li><strong>Violência Moral e Patrimonial:</strong> Frequentemente associadas à violência psicológica, minando a honra e autonomia.</li>
+                        <li><strong>Violência Psicológica Virtual:</strong> Atingiu recorde de 2.157 vítimas em 2023 (+24% vs 2022).</li>
+                         <li><strong>Violências Simultâneas:</strong> Mais de 22 mil mulheres denunciaram ter sido vítimas de violências simultâneas (psicológica e moral: 38%; física e psicológica: 22%).</li>
+                    </ul>
+                </div>
+            </div>
+             <div class="stat-card mt-8">
+                <h3 class="text-xl font-semibold mb-4 text-center text-slate-700">Tipos de Violência Reportados (2023)</h3>
+                 <p class="text-sm text-center text-slate-500 mb-4">Distribuição dos principais tipos de violência entre as vítimas que buscaram ajuda e tiveram seus casos registrados. A violência psicológica é a mais prevalente.</p>
+                <div class="chart-container h-80 md:h-96 max-w-2xl">
+                    <canvas id="tiposViolenciaChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section id="tendencias" class="my-12">
+            <h2 class="section-title text-rose-600 text-center">Tendências da Violência</h2>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="stat-card">
+                    <h3 class="text-xl font-semibold mb-2 text-slate-700">Evolução da Violência Psicológica</h3>
+                    <p class="text-sm text-slate-500 mb-4">A violência psicológica registrou um aumento de 17% de 2022 para 2023, sinalizando uma crescente preocupação.</p>
+                    <div class="chart-container h-72 md:h-80">
+                        <canvas id="violenciaPsicologicaTrendChart"></canvas>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <h3 class="text-xl font-semibold mb-2 text-slate-700">Feminicídios e Estupros</h3>
+                     <p class="text-sm text-slate-500 mb-4">Houve uma ligeira queda nos feminicídios (-11%) e estupros (-3%) de 2022 para 2023. No entanto, a análise de tendências requer cautela devido à subnotificação e flutuações anuais.</p>
+                    <div class="chart-container h-72 md:h-80">
+                        <canvas id="feminicidioEstuproTrendChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="geografia" class="my-12">
+            <h2 class="section-title text-rose-600 text-center">Onde a Violência se Concentra?</h2>
+            <p class="text-center mb-8 text-lg max-w-2xl mx-auto">A Região Metropolitana do Rio de Janeiro é o epicentro da violência registrada, mas o interior pode esconder "zonas de sombra" com alta subnotificação.</p>
+            <div class="stat-card">
+                <h3 class="text-xl font-semibold mb-4 text-center text-slate-700">Concentração de Crimes Graves na Região Metropolitana (2023)</h3>
+                <div class="chart-container h-96 max-w-3xl">
+                    <canvas id="concentracaoGeograficaChart"></canvas>
+                </div>
+                <p class="text-sm text-slate-500 mt-4 text-center">O interior, apesar de menos registros, enfrenta barreiras de acesso a denúncias e serviços.</p>
+            </div>
+        </section>
+
+        <section id="causas" class="my-12">
+            <h2 class="section-title text-rose-600 text-center">Raízes do Problema: Causas da Violência</h2>
+             <p class="text-center mb-8 text-lg max-w-2xl mx-auto">A violência contra mulheres é multifatorial, com raízes profundas em aspectos socioculturais, dinâmicas individuais e falhas institucionais.</p>
+            <div class="grid md:grid-cols-1 lg:grid-cols-3 gap-6">
+                <div class="stat-card bg-rose-50">
+                    <h3 class="text-xl font-semibold text-rose-700 mb-3">Determinantes Socioculturais</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li><strong>Patriarcado e Machismo:</strong> Sistema de dominação masculina que desvaloriza o feminino e normaliza a violência.</li>
+                        <li><strong>Desigualdade de Gênero:</strong> Papéis e poderes desiguais atribuídos a homens e mulheres.</li>
+                        <li><strong>Normas Culturais:</strong> Culpabilização da vítima e tolerância social com a violência ("briga de casal").</li>
+                        <li><strong>Movimentos Ultraconservadores:</strong> Ataques à igualdade de gênero que podem legitimar a violência.</li>
+                    </ul>
+                </div>
+                <div class="stat-card bg-orange-50">
+                    <h3 class="text-xl font-semibold text-orange-700 mb-3">Dinâmicas Individuais e Relacionais</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li><strong>Motivações dos Agressores (Feminicídio):</strong> Briga/discussão (42%), não aceitação do fim do relacionamento (20%), ciúmes (17%).</li>
+                        <li><strong>Histórico Criminal:</strong> 57% dos autores de feminicídio tinham antecedentes criminais (maioria por violência doméstica).</li>
+                        <li><strong>Uso de Álcool/Drogas:</strong> Presente em parte considerável dos casos de feminicídio.</li>
+                        <li><strong>Relação Íntima:</strong> Companheiros e ex-companheiros são os principais autores de feminicídio (~80%).</li>
+                    </ul>
+                </div>
+                <div class="stat-card bg-purple-50">
+                    <h3 class="text-xl font-semibold text-purple-700 mb-3">Influências Sistêmicas e Institucionais</h3>
+                    <ul class="list-disc list-inside space-y-2 text-sm">
+                        <li><strong>Subnotificação:</strong> Muitos casos não chegam ao conhecimento das autoridades (medo, vergonha, descrença).</li>
+                        <li><strong>Falhas no Sistema de Justiça:</strong> Falta de recursos, morosidade, revitimização, fiscalização inadequada de medidas protetivas.</li>
+                        <li><strong>Vulnerabilidade Socioeconômica:</strong> Pobreza e baixa escolaridade aumentam o risco e dificultam a saída de ciclos de violência.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="stat-card mt-8">
+                <h3 class="text-xl font-semibold mb-4 text-center text-slate-700">Motivações dos Autores de Feminicídio (2023)</h3>
+                <div class="chart-container h-80 md:h-96 max-w-md">
+                    <canvas id="motivacoesFeminicidioChart"></canvas>
+                </div>
+                 <p class="text-sm text-slate-500 mt-4 text-center">Controle, posse e discussões banais são estopins frequentes para o crime mais extremo contra a mulher.</p>
+            </div>
+        </section>
+        
+        <section id="perfil" class="my-12">
+            <h2 class="section-title text-rose-600 text-center">Perfil da Violência Extrema: Feminicídio em 2023</h2>
+             <p class="text-center mb-8 text-lg max-w-2xl mx-auto">Analisar os casos de feminicídio revela vulnerabilidades específicas e falhas no sistema de proteção.</p>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="stat-card text-center">
+                    <span class="text-5xl text-amber-500">🚺</span>
+                    <p class="text-2xl font-semibold mt-2">62%</p>
+                    <p class="stat-label">das vítimas de feminicídio eram negras.</p>
+                </div>
+                <div class="stat-card text-center">
+                     <span class="text-5xl text-amber-500">🚫</span>
+                    <p class="text-2xl font-semibold mt-2">57%</p>
+                    <p class="stat-label">dos autores de feminicídio tinham antecedentes criminais (a maioria por violência doméstica).</p>
+                </div>
+                <div class="stat-card text-center">
+                    <span class="text-5xl text-amber-500">🗣️</span>
+                    <p class="text-2xl font-semibold mt-2">56 de 99</p>
+                    <p class="stat-label">vítimas de feminicídio já haviam sofrido violência doméstica anteriormente e não denunciaram.</p>
+                </div>
+                 <div class="stat-card md:col-span-2 lg:col-span-3">
+                    <h3 class="text-xl font-semibold mb-2 text-slate-700">Outros Dados Relevantes sobre Feminicídios (2023):</h3>
+                    <ul class="list-disc list-inside text-slate-600 space-y-1">
+                        <li>Quase metade das vítimas tinha entre 30 e 59 anos.</li>
+                        <li>67 vítimas eram mães, deixando filhos (40 menores de idade). Em 15 ocasiões, os filhos testemunharam o crime.</li>
+                        <li>Arma branca foi o meio predominante, seguida por arma de fogo.</li>
+                        <li>70% dos autores foram presos.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="ciclo-subnotificacao" class="my-12">
+            <h2 class="section-title text-rose-600 text-center">Mecanismos Perversos: Ciclo da Violência e Subnotificação</h2>
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="stat-card">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-700">O Ciclo da Violência Doméstica</h3>
+                    <p class="text-sm text-slate-500 mb-4">Muitas mulheres ficam presas em relacionamentos abusivos devido a um ciclo que alterna tensão, agressão e uma aparente reconciliação.</p>
+                    <div class="space-y-4">
+                        <div class="flow-item"><strong>1. Aumento da Tensão:</strong> Hostilidade, humilhações, ameaças veladas. Medo e ansiedade na vítima.</div>
+                        <div class="text-center text-2xl text-rose-500">&#11107;</div>
+                        <div class="flow-item"><strong>2. Explosão da Violência:</strong> Agressão física, verbal, sexual ou psicológica explícita.</div>
+                        <div class="text-center text-2xl text-rose-500">&#11107;</div>
+                        <div class="flow-item"><strong>3. Lua de Mel (Arrependimento e Comportamento Carinhoso):</strong> Agressor pede desculpas, promete mudar, demonstra afeto. Vítima pode sentir esperança.</div>
+                         <div class="text-center text-2xl text-rose-500">&#11107; (ciclo recomeça, muitas vezes com menos tempo na "lua de mel")</div>
+                    </div>
+                    <p class="text-xs text-slate-400 mt-4">Fatores como dependência financeira, filhos e laços afetivos dificultam a quebra do ciclo.</p>
+                </div>
+                 <div class="stat-card">
+                    <h3 class="text-xl font-semibold mb-4 text-slate-700">O Silêncio que Mata: Subnotificação</h3>
+                    <p class="text-sm text-slate-500 mb-4">As estatísticas oficiais, por mais alarmantes, são apenas a ponta do iceberg. Muitas vítimas não denunciam por:</p>
+                    <ul class="list-disc list-inside space-y-2 text-slate-600">
+                        <li>Medo de represálias do agressor.</li>
+                        <li>Vergonha e culpa.</li>
+                        <li>Descrença no sistema de justiça e proteção.</li>
+                        <li>Dependência emocional ou financeira.</li>
+                        <li>Normalização da violência ("foi só uma briga").</li>
+                        <li>Falta de informação sobre seus direitos.</li>
+                    </ul>
+                    <div class="mt-6 p-4 bg-rose-100 rounded-md">
+                        <p class="text-rose-700 font-semibold text-lg">Em 2023, 56 das 99 vítimas de feminicídio no RJ já haviam sofrido violência doméstica, mas não denunciaram o agressor.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="chamada-acao" class="my-12 py-12 bg-rose-600 text-white text-center px-4">
+            <h2 class="text-3xl font-bold mb-6">Juntos por um Futuro Livre de Violência</h2>
+            <p class="text-lg max-w-2xl mx-auto mb-6">
+                A prevenção da violência contra as mulheres exige um esforço conjunto da sociedade e do poder público. Educação para igualdade, fortalecimento da rede de apoio, responsabilização dos agressores e combate à subnotificação são caminhos essenciais.
+            </p>
+            <p class="text-lg font-semibold">Se você ou alguém que você conhece está em situação de violência, procure ajuda:</p>
+            <p class="text-2xl font-bold mt-2">Ligue 180 (Central de Atendimento à Mulher)</p>
+            <p class="text-md mt-1">Disque 190 (Polícia Militar em caso de emergência)</p>
+        </section>
+    </main>
+
+    <footer class="text-center py-6 bg-slate-800 text-slate-300 text-sm">
+        <p>&copy; <span id="currentYear"></span> Infográfico SPA. Dados majoritariamente do Dossiê Mulher 2024 (ISP-RJ).</p>
+        <p>Este é um material educativo e informativo.</p>
+    </footer>
+
+    <script>
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        function wrapText(text, maxWidth) {
+            if (typeof text !== 'string') return text;
+            const words = text.split(' ');
+            let lines = [];
+            let currentLine = words[0];
+
+            for (let i = 1; i < words.length; i++) {
+                if ((currentLine + ' ' + words[i]).length > maxWidth) {
+                    lines.push(currentLine);
+                    currentLine = words[i];
+                } else {
+                    currentLine += ' ' + words[i];
+                }
+            }
+            lines.push(currentLine);
+            return lines.length > 1 ? lines : text; // Retorna array se multilinha, senão string original
+        }
+        
+        const commonChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: '#334155' // text-slate-700
+                    }
+                },
+                tooltip: {
+                    callbacks: {
+                        title: function(tooltipItems) {
+                            const item = tooltipItems[0];
+                            let label = item.chart.data.labels[item.dataIndex];
+                            if (Array.isArray(label)) {
+                              return label.join(' ');
+                            } else {
+                              return label;
+                            }
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: '#334155' },
+                    grid: { color: '#e2e8f0' } // slate-200
+                },
+                x: {
+                    ticks: { color: '#334155' },
+                    grid: { display: false }
+                }
+            }
+        };
+
+        // Gráfico: Tipos de Violência Reportados (2023)
+        const tiposViolenciaCtx = document.getElementById('tiposViolenciaChart').getContext('2d');
+        new Chart(tiposViolenciaCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapText('Violência Psicológica Total', 16), 
+                    wrapText('Ameaça (subtipo da Psicológica)', 16),
+                    wrapText('Violência Sexual Total', 16), 
+                    wrapText('Estupro (parte da Sexual)', 16), 
+                    wrapText('Importunação Sexual', 16),
+                    wrapText('Violência Psicológica Virtual',16),
+                    wrapText('Feminicídio Consumado', 16)
+                ],
+                datasets: [{
+                    label: 'Número de Vítimas/Casos em 2023',
+                    data: [51019, 43333, 7284, 4759, 2227, 2157, 99],
+                    backgroundColor: [
+                        '#d90429', // Vermelho para Psicológica
+                        '#dc2626', // Vermelho mais claro para Ameaça
+                        '#8b5cf6', // Roxo para Sexual
+                        '#7c3aed', // Roxo mais claro para Estupro
+                        '#9333ea', // Roxo ainda mais claro para Importunação
+                        '#c026d3', // Magenta para Virtual
+                        '#f97316'  // Laranja para Feminicídio
+                    ],
+                    borderColor: '#ffffff',
+                    borderWidth: 1
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+
+        // Gráfico: Tendência da Violência Psicológica
+        const violenciaPsicologicaTrendCtx = document.getElementById('violenciaPsicologicaTrendChart').getContext('2d');
+        new Chart(violenciaPsicologicaTrendCtx, {
+            type: 'line',
+            data: {
+                labels: ['2022 (Estimado)', '2023'],
+                datasets: [{
+                    label: 'Vítimas de Violência Psicológica',
+                    data: [43606, 51019], // 51019 / 1.17 ≈ 43606
+                    borderColor: '#d90429',
+                    backgroundColor: 'rgba(217, 4, 41, 0.1)',
+                    fill: true,
+                    tension: 0.1
+                }]
+            },
+            options: { ...commonChartOptions }
+        });
+
+        // Gráfico: Tendência Feminicídios e Estupros
+        const feminicidioEstuproTrendCtx = document.getElementById('feminicidioEstuproTrendChart').getContext('2d');
+        new Chart(feminicidioEstuproTrendCtx, {
+            type: 'bar',
+            data: {
+                labels: ['2022', '2023'],
+                datasets: [
+                    {
+                        label: 'Feminicídios',
+                        data: [111, 99],
+                        backgroundColor: '#f97316',
+                         borderColor: '#ffffff',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Estupros',
+                        data: [4906, 4759], // 4759 / 0.97 ≈ 4906
+                        backgroundColor: '#8b5cf6',
+                         borderColor: '#ffffff',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: { ...commonChartOptions, scales: { ...commonChartOptions.scales, x: { ...commonChartOptions.scales.x, grid: { display: true, color: '#e2e8f0' } } } }
+        });
+        
+        // Gráfico: Concentração Geográfica
+        const concentracaoGeograficaCtx = document.getElementById('concentracaoGeograficaChart').getContext('2d');
+        new Chart(concentracaoGeograficaCtx, {
+            type: 'bar',
+            data: {
+                labels: [
+                    wrapText('Feminicídios Consumados', 16), 
+                    wrapText('Tentativas de Feminicídio (LMP)', 16), 
+                    wrapText('Lesão Corporal Dolosa (LMP)', 16), 
+                    wrapText('Violência Sexual', 16)
+                ],
+                datasets: [
+                    {
+                        label: 'Região Metropolitana (%)',
+                        data: [72, 91, 67, 71],
+                        backgroundColor: '#3b82f6', // Azul
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Outras Regiões (%)',
+                        data: [28, 9, 33, 29], // 100 - valor da Metropolitana
+                        backgroundColor: '#a5b4fc', // Azul claro
+                        borderColor: '#ffffff',
+                        borderWidth: 1
+                    }
+                ]
+            },
+            options: { ...commonChartOptions, indexAxis: 'y', scales: { ...commonChartOptions.scales, y: { ...commonChartOptions.scales.y, stacked: false }, x: { ...commonChartOptions.scales.x, stacked: false, max: 100, grid: { display: true, color: '#e2e8f0' } } } }
+        });
+
+        // Gráfico: Motivações dos Autores de Feminicídio
+        const motivacoesFeminicidioCtx = document.getElementById('motivacoesFeminicidioChart').getContext('2d');
+        new Chart(motivacoesFeminicidioCtx, {
+            type: 'doughnut',
+            data: {
+                labels: [
+                    wrapText('Briga ou Discussão', 16), 
+                    wrapText('Não Aceitação do Fim do Relacionamento', 16), 
+                    wrapText('Ciúmes', 16), 
+                    wrapText('Desconfiança de Traição', 16), 
+                    wrapText('Outros/Não Especificado', 16)
+                ],
+                datasets: [{
+                    label: 'Motivações',
+                    data: [42, 20, 17, 6, 15], // Somam 100%
+                    backgroundColor: ['#d90429', '#f97316', '#8b5cf6', '#3b82f6', '#6b7280'],
+                    borderColor: '#ffffff',
+                    borderWidth: 2
+                }]
+            },
+            options: { 
+                responsive: true, 
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: { position: 'bottom', labels: { color: '#334155', boxWidth:15, padding:15 } },
+                    tooltip: commonChartOptions.plugins.tooltip
+                }
+            }
+        });
+
+    </script>
+</body>
+</html>
